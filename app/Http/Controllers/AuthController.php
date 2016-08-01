@@ -2,15 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\User;
+use Auth;
 
 class AuthController extends Controller
 {
-    public function getLogin()
+    public function postRegister(Request $request)
     {
-        return view('template.login');
+        $this->validate($request, [
+            'username'  => 'required|alpha_dash|min:4|unique:users',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required|min:6|confirmed',
+        ]);
+
+        User::Create([
+            'username'      => $request->input('username'),
+            'email'         => $request->input('email'),
+            'password'      => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->route('home')->with('info', 'Sėkmingai užsiregistravot! Dabar galit prisijungti!');
+
     }
 
     public function postLogin(Request $request)
@@ -21,37 +35,16 @@ class AuthController extends Controller
         ]);
 
         if(!Auth::attempt($request->only('username', 'password'), $request->has('remember'))) {
-            return redirect()->back()->with('info', 'Neteisingas slapyvardis arba slaptažodis!');
+            return redirect()->route('home')->with('info', 'Neteisingas slapyvardis arba slaptažodis!');
         }
 
-        return redirect()->route('home')->with('info', 'Sėkmingai prisijungta!');
+        return redirect()->route('home')->with('info', 'Sėkmingai prisijungei!');
     }
 
-    public function getRegister()
-    {
-        return view('template.register');
-    }
-
-    public function postRegister(Request $request)
-    {
-        $this->validate($request, [
-            'username' => 'required|alpha_dash|unique:users|min:4',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        User::create([
-            'username' => $request->input('username'),
-            'password' => bcrypt($request->input('password')),
-        ]);
-
-        return redirect()->route('auth.login')->with('info', 'Sėkmingai užsiregistravot. Dabar galit prisijungti');
-    }
-
-    public function getLogout()
+    public function logout()
     {
         Auth::logout();
 
-        return redirect()->route('home')->with('info', 'Sėkmingai atsijungei!');
+        return redirect()->route('home')->with('info', 'Sėkmingai atsijungėt!');
     }
-
 }

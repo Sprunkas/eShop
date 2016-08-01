@@ -12,13 +12,10 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'title',
-        'total', 
+        'user_id', 
+        'address_id',
+        'quantity',
+        'total',
     ];
 
-    public function items()
-    {
-        return $this->hasMany('App\Models\Item');
-    }
 }

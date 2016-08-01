@@ -12,8 +12,10 @@
 */
 
 /*
- * Pagrindinis puslapis
- */
+|--------------------------------------------------------------------------
+| Pagrindinis puslapis
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', [
     'uses' => 'HomeController@index',
@@ -21,87 +23,270 @@ Route::get('/', [
 ]);
 
 /*
- * Prisijungimas, registracija ir atsijungimas
- */
+|--------------------------------------------------------------------------
+| Registracija
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/prisijungti', [
-    'uses' => 'AuthController@getLogin',
-    'as' => 'auth.login',
-    'middleware' => ['guest'],
-]);
-
-Route::post('/prisijungti', [
-    'uses' => 'AuthController@postLogin',
-    'middleware' => ['guest'],
-]);
-
-Route::get('/registracija', [
-    'uses' => 'AuthController@getRegister',
+Route::post('/registracija', [
+    'uses' => 'AuthController@postRegister',
     'as' => 'auth.register',
     'middleware' => ['guest'],
 ]);
 
-Route::post('/registracija', [
-    'uses' => 'AuthController@postRegister',
+/*
+|--------------------------------------------------------------------------
+| Prisijungimas
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/prisijungti', [
+    'uses' => 'AuthController@postLogin',
+    'as' => 'auth.login',
     'middleware' => ['guest'],
 ]);
 
+/*
+|--------------------------------------------------------------------------
+| Atsijungimas
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/atsijungti', [
-    'uses' => 'AuthController@getLogout',
+    'uses' => 'AuthController@logout',
     'as' => 'auth.logout',
     'middleware' => ['auth'],
 ]);
 
 /*
- * Užsakymų sąrašai bei jų tvarkymas
- */
+|--------------------------------------------------------------------------
+| Profilis ir jo nustatymai
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/uzsakymu-sarasas', [
-    'uses' => 'OrdersController@getOrdersList',
-    'as' => 'order.list',
-    'middleware' => ['auth'],
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/profilis', [
+        'uses' => 'ProfileController@index',
+        'as' => 'profile.home',
+    ]);
+
+    Route::get('/uzsakymai', [
+        'uses' => 'ProfileController@getOrders',
+        'as' => 'profile.orders',
+    ]);
+
+    Route::get('/adresai', [
+        'uses' => 'ProfileController@getAddresses',
+        'as' => 'profile.addresses',
+    ]);
+
+    Route::get('/prideti-adresa', [
+        'uses' => 'ProfileController@getAddAddress',
+        'as' => 'profile.add.address',
+    ]);
+
+    Route::post('/prideti-adresa', [
+        'uses' => 'ProfileController@postAddAddress',
+    ]);
+
+    Route::get('/redaguoti-adresa/{id}', [
+        'uses' => 'ProfileController@getEditAddress',
+        'as' => 'profile.edit.address',
+    ]);
+
+    Route::post('/redaguoti-adresa/{id}', [
+        'uses' => 'ProfileController@postEditAddress',
+    ]);
+
+    Route::get('/trinti-adresa/{id}', [
+        'uses' => 'ProfileController@destroy',
+        'as' => 'profile.destroy.address'
+    ]);
+
+    Route::get('/nustatymai', [
+        'uses' => 'ProfileController@getSettings',
+        'as' => 'profile.settings',
+    ]);
+
+    Route::post('/nustatymai', [
+        'uses' => 'ProfileController@postSettings',
+    ]);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Administracijos panelė
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['middleware' => 'admin'], function() {
+
+    Route::get('/admin', [
+        'uses' => 'AdminController@index',
+        'as' => 'admin.home',
+    ]);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Produktų trinimas, redagavimas..
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['middleware' => 'admin'], function() {
+
+    Route::get('/admin/produktai', [
+        'uses' => 'ProductsController@index',
+        'as' => 'admin.products',
+    ]);
+
+    Route::get('/admin/naujas-produktas', [
+        'uses' => 'ProductsController@getNewProduct',
+        'as' => 'admin.new.product',
+    ]);
+
+    Route::post('/admin/naujas-produktas', [
+        'uses' => 'ProductsController@postNewProduct',
+    ]);
+
+    Route::get('/admin/redaguoti-produkta/{id}', [
+        'uses' => 'ProductsController@getEditProduct',
+        'as' => 'admin.edit.product',
+    ]);
+
+    Route::post('/admin/redaguoti-produkta/{id}', [
+        'uses' => 'ProductsController@postEditProduct',
+    ]);
+
+    Route::get('/admin/trinti-produkta/{id}', [
+        'uses' => 'ProductsController@deleteProduct',
+        'as' => 'admin.delete.product',
+    ]);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Kategorijų trinimas, redagavimas..
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['middleware' => 'admin'], function() {
+
+    Route::get('/admin/kategorijos', [
+        'uses' => 'CategoryController@index',
+        'as' => 'admin.categories',
+    ]);
+
+    Route::get('/admin/kurti-kategorija', [
+        'uses' => 'CategoryController@getNewCategory',
+        'as' => 'admin.new.category',
+    ]);
+
+    Route::post('/admin/kurti-kategorija', [
+        'uses' => 'CategoryController@postNewCategory',
+    ]);
+
+    Route::get('/admin/redaguoti-kategorija/{id}', [
+        'uses' => 'CategoryController@getEditCategory',
+        'as' => 'admin.edit.category',
+    ]);
+
+    Route::post('/admin/redaguoti-kategorija/{id}', [
+        'uses' => 'CategoryController@postEditCategory',
+    ]);
+
+    Route::get('/admin/trinti-kategorija/{id}', [
+        'uses' => 'CategoryController@deleteCategory',
+        'as' => 'admin.delete.category',
+    ]);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Krepšelio peržiūra ir pirkimas
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/krepselis', [
+    'uses' => 'CartController@index',
+    'as' => 'cart',
 ]);
 
-Route::get('/naujas-uzsakymas', [
-    'uses' => 'OrdersController@getNewOrder',
-    'as' => 'order.new',
-    'middleware' => ['auth'],
+Route::get('/pasalinti-preke/{id}', [
+    'uses' => 'CartController@deleteItem',
+    'as' => 'cart.delete',
 ]);
 
-Route::post('/naujas-uzsakymas', [
-    'uses' => 'OrdersController@postNewOrder',
-    'middleware' => ['auth'],
+Route::get('/prideti-i-krepseli/{id}', [
+    'uses' => 'CartController@getAddToCart',
+    'as' => 'product.addToCart',
 ]);
 
-Route::get('/trinti-uzsakyma/{id}', [
-    'uses' => 'OrdersController@postDeleteOrder',
-    'as' => 'order.delete',
-    'middleware' => ['auth'],
+Route::get('/uzsakyti', [
+    'uses' => 'CartController@getCheckout',
+    'as' => 'checkout'
 ]);
 
-Route::post('/trinti-uzsakyma/{id}', [
-    'uses' => 'OrdersController@postDeleteOrder',
-    'middleware' => ['auth'],
+Route::post('/uzsakyti', [
+    'uses' => 'CartController@postCheckout',
 ]);
 
-Route::get('/redaguoti-uzsakyma/{id}', [
-    'uses' => 'OrdersController@getEditOrder',
-    'as' => 'order.edit',
-    'middleware' => ['auth'],
+/*
+|--------------------------------------------------------------------------
+| Apie mus
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/apie-mus', [
+    'uses' => 'AboutUsController@index',
+    'as' => 'aboutus',
 ]);
 
-Route::post('/redaguoti-uzsakyma/{id}', [
-    'uses' => 'OrdersController@postEditOrder',
-    'middleware' => ['auth'],
+/*
+|--------------------------------------------------------------------------
+| Kontaktai
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/kontaktai', [
+    'uses' => 'ContactsController@index',
+    'as' => 'contacts',
 ]);
 
-Route::get('/trinti-preke/{id}', [
-    'uses' => 'OrdersController@postDeleteItem',
-    'as' => 'order.delete.item',
-    'middleware' => ['auth'],
+/*
+|--------------------------------------------------------------------------
+| Terminai ir sąlygos
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/terminai-ir-salygos', [
+    'uses' => 'TermsController@index',
+    'as' => 'terms',
 ]);
 
-Route::post('/trinti-preke/{id}', [
-    'uses' => 'OrdersController@postDeleteItem',
-    'middleware' => ['auth'],
+/*
+|--------------------------------------------------------------------------
+| Produktai pagal kategoriją
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/{category}', [
+    'uses' => 'CategoryController@getProductsByCategory',
+    'as' => 'category',
+]);
+
+/*
+|--------------------------------------------------------------------------
+| Produkto peržiūra
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/{category}/{slug}', [
+    'uses' => 'ProductsController@getProduct',
+    'as' => 'product.home',
 ]);

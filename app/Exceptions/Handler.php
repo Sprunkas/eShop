@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Cart;
 use Exception;
+use App\Models\Category;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -34,6 +36,21 @@ class Handler extends ExceptionHandler
     public function report(Exception $e)
     {
         parent::report($e);
+    }
+
+    protected function renderHttpException(HttpException $e) 
+    {
+        $status = $e->getStatusCode();
+
+        $categories = Category::all();
+        $items = Cart::content();
+        $total = Cart::subtotal();
+
+        if (view()->exists("errors.{$status}")) {
+            return response()->view("errors.{$status}", compact('categories', 'items', 'total'), $status);
+        } else {
+            return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
+        }
     }
 
     /**

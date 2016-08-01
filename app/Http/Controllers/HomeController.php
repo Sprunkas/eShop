@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use App\Models\Category;
+use App\Models\Product;
+use Cart;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('template.home');
+        $items = Cart::content();
+
+        return view('template.home')->with([
+            'products'      => Product::LIMIT(12)->get(),
+            'categories'    => Category::all(),
+            'total'         => Cart::subtotal(),
+            'items'         => $items,
+        ]);
     }
 }

@@ -88,7 +88,7 @@
                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
                     <div class="pull-right">
                         <ul class="userMenu">
-                            @if(Auth::user()->admin)
+                            @if(Auth::check() && Auth::user()->admin)
                                 <li><a href="{{ route('admin.home') }}">Admin. panele</a></li>
                             @endif
                             @if(Auth::check())

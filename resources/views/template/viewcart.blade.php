@@ -52,7 +52,7 @@
                                                             </h4>
                                                         @endif
                                                     @endforeach
-                                                    <div class="price"><span>{{ $item->price }} €</span></div>
+                                                    <div class="price"><span>{{ number_format($item->price, 2) }} €</span></div>
                                                     </div>
                                                 </td>
                                                 <td class="delete"><a href="{{ route('cart.delete', ['id' => $item->rowId]) }}"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
@@ -87,7 +87,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Kaina</td>
-                                        <td class="price">{{ number_format($total, 2) }} €</td>
+                                        <td class="price">{{ $total }} €</td>
                                     </tr>
                                     <tr>
                                         <td>Siuntimas</td>
@@ -101,7 +101,7 @@
                                     <tfooter>
                                         <tr>
                                             <td>Išviso</td>
-                                            <td class=" site-color" id="total-price">{{ number_format($total, 2) }} €</td>
+                                            <td class=" site-color" id="total-price">{{ $total }} €</td>
                                         </tr>
                                     </tfooter>
                                 </table>

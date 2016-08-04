@@ -117,7 +117,7 @@
                     class="icon-bar"> </span> <span class="icon-bar"> </span></button>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"><i
                     class="fa fa-shopping-cart colorWhite"> </i> <span
-                    class="cartRespons colorWhite"> Krepšelis ({{ count($items) ? number_format($total, 2) . ' €' : '0.00 €' }})</span></button>
+                    class="cartRespons colorWhite"> Krepšelis ({{ count($items) ? $total . ' €' : '0.00 €' }})</span></button>
             <a class="navbar-brand " href="{{ route('home') }}"> <img src="{{ URL::asset('images/logo.png') }}" alt="eShop"> </a>
         </div>
 
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="miniCartFooter text-right">
-                    <h3 class="text-right subtotal"> Išviso: {{ count($items) ? number_format($total, 2) . ' €' : '0.00 €' }}</h3>
+                    <h3 class="text-right subtotal"> Išviso: {{ count($items) ? $total . ' €' : '0.00 €' }}</h3>
                     <a class="btn btn-sm btn-danger" href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i> Peržiūrėti krepšelį</a>
                     <a href="{{ route('checkout') }}" class="btn btn-sm btn-primary">Pirkti</a>
                 </div>
@@ -181,7 +181,7 @@
             <div class="nav navbar-nav navbar-right hidden-xs">
                 <div class="dropdown cartMenu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-shopping-cart"></i><span class="cartRespons"> Krepšelis ({{ count($items) ? number_format($total, 2) . ' €' : '0.00 €' }})</span><b class="caret"></b>
+                        <i class="fa fa-shopping-cart"></i><span class="cartRespons"> Krepšelis ({{ count($items) ? $total . ' €' : '0.00 €' }})</span><b class="caret"></b>
                     </a>
                     <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
                         <div class="w100 miniCartTable scroll-pane">
@@ -226,7 +226,7 @@
                         </div>
 
                         <div class="miniCartFooter text-right">
-                            <h3 class="text-right subtotal"> Išviso: {{ count($items) ? number_format($total, 2) . ' €' : '0.00 €' }}</h3>
+                            <h3 class="text-right subtotal"> Išviso: {{ count($items) ? $total . ' €' : '0.00 €' }}</h3>
                             <a class="btn btn-sm btn-danger" href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i> Peržiūrėti krepšelį</a>
                             <a href="{{ route('checkout') }}" class="btn btn-sm btn-primary">Pirkti</a>
                         </div>

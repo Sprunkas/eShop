@@ -120,7 +120,7 @@
                         <tbody>
                         <tr>
                             <td>Kaina</td>
-                            <td class="price">{{ number_format($total, 2) }} €</td>
+                            <td class="price">{{ $total }} €</td>
                         </tr>
                         <tr>
                             <td>Siuntimas</td>
@@ -134,7 +134,7 @@
                         <tfooter>
                             <tr>
                                 <td>Išviso</td>
-                                <td class=" site-color" id="total-price">{{ number_format($total, 2) }} €</td>
+                                <td class=" site-color" id="total-price">{{ $total }} €</td>
                             </tr>
                         </tfooter>
                     </table>

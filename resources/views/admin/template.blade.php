@@ -23,7 +23,6 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ route('home') }}">Namai</a></li>
-                        <li><a href="#">Nustatymai</a></li>
                         <li><a href="{{ route('auth.logout') }}">Atsijungti</a></li>
                     </ul>
                 </div>

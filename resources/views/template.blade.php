@@ -20,5 +20,7 @@
     @yield('content')
     @include('partials.footer')
     @yield('scripts')
+    <script src="{{ URL::asset('js/registration.js') }}"></script>
+    <script src="{{ URL::asset('js/login.js') }}"></script>
 </body>
 </html>

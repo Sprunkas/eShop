@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password'      => bcrypt($request->input('password')),
         ]);
 
-        return redirect()->route('home')->with('info', 'Sėkmingai užsiregistravot! Dabar galit prisijungti!');
+        return response()->json(['success' => 'Sėkmingai užsiregistravot! Dabar galit prisijungti!']);
 
     }
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
         ]);
 
         if(!Auth::attempt($request->only('username', 'password'), $request->has('remember'))) {
-            return redirect()->route('home')->with('info', 'Neteisingas slapyvardis arba slaptažodis!');
+            return response()->json(['error' => 'Neteisingas slapyvardis arba slaptažodis!'], 422);
         }
 
         return redirect()->route('home')->with('info', 'Sėkmingai prisijungei!');

@@ -1,8 +1,6 @@
 @extends('template')
 
 @section('stylesheet')
-    <link href="{{ URL::asset('css/ion.checkRadio.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/ion.checkRadio.cloudy.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/jquery.minimalect.min.css') }}" media="screen"/>
 @stop
 

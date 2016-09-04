@@ -17,7 +17,7 @@
                         <hr class="hr hr30">
                         <div class="row animated">
                             <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-                                <img class="img-responsive" src="images/site/girl1.jpg" alt="img">
+                                <img class="img-responsive" src="{{ URL::asset('images/site/girl1.jpg') }}" alt="img">
                                 <h3 class="block-title-3">
                                     Consectetur adipiscing
                                 </h3>
@@ -29,7 +29,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-                                <img class="img-responsive" src="images/site/girl2.jpg" alt="img">
+                                <img class="img-responsive" src="{{ URL::asset('images/site/girl2.jpg') }}" alt="img">
                                 <h3 class="block-title-3">
                                     Lorem ipsum dolor
                                 </h3>
@@ -41,7 +41,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-                                <img class="img-responsive" src="images/site/girl3.jpg" alt="img">
+                                <img class="img-responsive" src="{{ URL::asset('images/site/girl3.jpg') }}" alt="img">
                                 <h3 class="block-title-3">
                                     Consectetur adipiscing
                                 </h3>

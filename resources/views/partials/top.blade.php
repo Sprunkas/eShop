@@ -6,7 +6,7 @@
                 <h3 class="modal-title-site text-center">Prisijungimas</h3>
             </div>
             <div class="modal-body">
-                <form action="{{ route('auth.login') }}" method="POST">
+                <form action="{{ route('auth.login') }}" method="POST" id="login">
                     <div class="form-group login-username">
                         <input type="text" name="username" class="form-control input" size="20" placeholder="Slapyvardis">
                     </div>
@@ -46,7 +46,7 @@
                 <h3 class="modal-title-site text-center">Registracija</h3>
             </div>
             <div class="modal-body">
-                <form action="{{ route('auth.register') }}" method="POST">
+                <form action="{{ route('auth.register') }}" method="POST" id="register">
                     <div class="form-group reg-username">
                         <input type="text" name="username" class="form-control input" size="20" placeholder="Slapyvardis">
                     </div>

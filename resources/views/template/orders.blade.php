@@ -11,27 +11,31 @@
                     </div>
                     <div style="clear:both"></div>
                     <div class="col-xs-12 col-sm-12">
-                        <table class="footable">
-                            <thead>
-                            <tr>
-                                <th data-class="expand" data-sort-initial="true"><span title="table sorted by this column on load">Užsakymo ID</span></th>
-                                <th data-hide="default"> Kaina</th>
-                                <th data-hide="default" data-type="numeric"> Užsakymo data</th>
-                                <th data-hide="phone" data-type="numeric"> Statusas</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($orders as $order)
+                        @if(count($orders))
+                            <table class="footable">
+                                <thead>
                                 <tr>
-                                    <td width="15%">#{{ $order->id }}</td>
-                                    <td>{{ $order->total }} €</td>
-                                    <td>{{ $order->created_at }}</td>
-                                    <td width="5%"><span class="label label-warning">Vykdoma</span>
-                                    </td>
+                                    <th data-class="expand" data-sort-initial="true"><span title="table sorted by this column on load">Užsakymo ID</span></th>
+                                    <th data-hide="default"> Kaina</th>
+                                    <th data-hide="default" data-type="numeric"> Užsakymo data</th>
+                                    <th data-hide="phone" data-type="numeric"> Statusas</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td width="15%">#{{ $order->id }}</td>
+                                        <td>{{ $order->total }} €</td>
+                                        <td>{{ $order->created_at }}</td>
+                                        <td width="5%"><span class="label label-warning">Vykdoma</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            Užsakymų sąrašas yra tuščias
+                        @endif
                     </div>
                     <div style="clear:both"></div>
                     <div class="col-lg-12 clearfix">

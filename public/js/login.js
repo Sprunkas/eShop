@@ -1,4 +1,4 @@
-$('#login').on('submit', function(e)
+$('.loginas').on('submit', function(e)
 {
     e.preventDefault();
     var $form = $(this);
@@ -14,16 +14,20 @@ $('#login').on('submit', function(e)
     }).fail(function(jqXhr) {
         if( jqXhr.status === 422 ) {
             $('.alert-warning').remove();
+            $('.alert.alert-danger').remove();
             $errors = jqXhr.responseJSON;
-            if($errors['error']) {
+            if($('#errors')) {
+                $('#errors').after('<div class="alert alert-danger">' + $errors['error'] + '</div>');
+            } 
+            if($('.modal-header')) {
                 $('.modal-header').after('<div class="alert alert-danger">' + $errors['error'] + '</div>');
             }
             $('.form-group').removeClass('has-error');
             $('span.help-block').remove();
             $.each($errors, function( key, value ) {
-                if('form-group login-' + key == $('.login-' + key).attr('class')) {
-                    $('.login-' + key).addClass('has-error');
-                    $('.login-' + key).append('<span class="help-block">' + value[0] + '</span>')
+                if('form-group ' + key == $('.' + key).attr('class')) {
+                    $('.' + key).addClass('has-error');
+                    $('.' + key).append('<span class="help-block">' + value[0] + '</span>')
                 }
             });
         }

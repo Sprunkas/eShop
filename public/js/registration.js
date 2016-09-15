@@ -1,4 +1,4 @@
-$('#register').on('submit', function(e)
+$('.registeris').on('submit', function(e)
 {
     var $form = $(this);
     e.preventDefault();
@@ -11,7 +11,9 @@ $('#register').on('submit', function(e)
     $.post(url, formData, function(jqXhr)
     {
         $errors = jqXhr.responseJSON;
-        $('#ModalSignup').modal('toggle');
+        if($('#ModalSignup').is(':visible')) {
+            $('#ModalSignup').modal('toggle');
+        }
         $('#ModalLogin').modal('toggle');
         $('.modal-header').after('<div class="alert alert-success">Sėkmingai užsiregistravot! Dabar galit prisijungti!</div>');
         $('.alert-success').delay(3000).fadeOut(1000);

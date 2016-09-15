@@ -30,11 +30,11 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
+            'login-username' => 'required',
+            'login-password' => 'required',
         ]);
 
-        if(!Auth::attempt($request->only('username', 'password'), $request->has('remember'))) {
+        if(!Auth::attempt(['username' => $request->input('login-username'), 'password' => $request->input('login-password')], $request->has('remember'))) {
             return response()->json(['error' => 'Neteisingas slapyvardis arba slaptažodis!'], 422);
         }
 

@@ -18,97 +18,97 @@
                         <div class="w100 clearfix">
                             <div class="row">
                                 <div style="clear: both"></div>
-                                <div class="onepage-checkout col-lg-12">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                       href="#BillingInformation" aria-expanded="true"
-                                                       aria-controls="BillingInformation">
-                                                        Pristatymo adresas
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="BillingInformation" class="panel-collapse collapse in" role="tabpanel"
-                                                 aria-labelledby="BillingInformation">
-                                                <div class="panel-body">
-                                                    <div id="exisitingAddressBox" class="collapse in">
-                                                        <div class="form-group uppercase"><strong>Pasirinkit pristatymo adresą</strong></div>
-                                                        <form action="{{ route('checkout') }}" method="POST">
+                                <form action="{{ route('checkout') }}" method="POST">
+                                    <div class="onepage-checkout col-lg-12">
+                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingOne">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                                           href="#BillingInformation" aria-expanded="true"
+                                                           aria-controls="BillingInformation">
+                                                            Pristatymo adresas
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="BillingInformation" class="panel-collapse collapse in" role="tabpanel"
+                                                     aria-labelledby="BillingInformation">
+                                                    <div class="panel-body">
+                                                        <div id="exisitingAddressBox" class="collapse in">
+                                                            <div class="form-group uppercase"><strong>Pasirinkit pristatymo adresą</strong></div>
                                                             <div class="form-group required maxwidth300">
                                                                 <label for="address">Pasirinkit adresą<sup>*</sup></label>
-                                                                <select class="form-control" required aria-required="true" name="address">
+                                                                <select class="form-control" name="address" id="address">
                                                                     <option disabled>-- Adresų pavadinimai --</option>
                                                                     @foreach($addresses as $address)
                                                                         <option value="{{ $address->id }}">{{ $address->title }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse"
-                                                       data-parent="#accordion" href="#Deliverymethod" aria-expanded="false"
-                                                       aria-controls="Deliverymethod">Pristatymo metodas
-                                                    </a>
-                                                </h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#Deliverymethod" aria-expanded="false"
+                                                           aria-controls="Deliverymethod">Pristatymo metodas
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="Deliverymethod" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="Deliverymethod">
+                                                    <div class="panel-body">
+                                                        <div class="w100 row">
+                                                            <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+                                                                <table style="width:100%"
+                                                                       class="table-bordered table tablelook2">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>Metodas</td>
+                                                                        <td>Informacija</td>
+                                                                        <td>Kaina</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label class="radio"><input type="radio" checked>Pristatymas į namus</label></td>
+                                                                        <td>Siuntinį gausit po 2 darbo dienų</td>
+                                                                        <td>Nemokamai!</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div id="Deliverymethod" class="panel-collapse collapse" role="tabpanel"
-                                                 aria-labelledby="Deliverymethod">
-                                                <div class="panel-body">
-                                                    <div class="w100 row">
-                                                        <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
-                                                            <table style="width:100%"
-                                                                   class="table-bordered table tablelook2">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>Metodas</td>
-                                                                    <td>Informacija</td>
-                                                                    <td>Kaina</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><label class="radio"><input type="radio" checked>Pristatymas į namus</label></td>
-                                                                    <td>Siuntinį gausit po 2 darbo dienų</td>
-                                                                    <td>Nemokamai!</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#Paymentmethod" aria-expanded="false"
+                                                           aria-controls="Paymentmethod">
+                                                            Mokėjimo būdas
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="Paymentmethod" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="Paymentmethod">
+                                                    <div class="panel-body">
+                                                        <div class="onepage-payment">
+                                                            <label class="radio"><input type="radio" checked>Grynais atsiemant</label>
+                                                                <div class="pull-left">
+                                                                    <button class="btn btn-primary btn-lg" type="submit">Užsakyti &nbsp; <i class="fa fa-arrow-circle-right"></i></button>
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse"
-                                                       data-parent="#accordion" href="#Paymentmethod" aria-expanded="false"
-                                                       aria-controls="Paymentmethod">
-                                                        Mokėjimo būdas
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="Paymentmethod" class="panel-collapse collapse" role="tabpanel"
-                                                 aria-labelledby="Paymentmethod">
-                                                <div class="panel-body">
-                                                    <div class="onepage-payment">
-                                                        <label class="radio"><input type="radio" checked>Grynais atsiemant</label>
-                                                            <div class="pull-left">
-                                                                <button class="btn btn-primary btn-lg" type="submit">Užsakyti &nbsp; <i class="fa fa-arrow-circle-right"></i></button>
-                                                            </div>
-                                                            {{ csrf_field() }}
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
+                                {{ csrf_field() }}
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -131,12 +131,12 @@
                             <td class="price">0.00 €</td>
                         </tr>
                         </tbody>
-                        <tfooter>
+                        <tfoot>
                             <tr>
                                 <td>Išviso</td>
                                 <td class=" site-color" id="total-price">{{ $total }} €</td>
                             </tr>
-                        </tfooter>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -159,49 +159,33 @@
     <script src="{{ URL::asset('js/bootstrap.touchspin.js') }}"></script>
     <script src="{{ URL::asset('js/script.js') }}"></script>
     <script>
-
         $(document).ready(function () {
-
             $('input#newAddress').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#newBillingAddressBox').collapse("show");
                 $('#exisitingAddressBox').collapse("hide");
-
             });
 
             $('input#exisitingAddress').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#newBillingAddressBox').collapse("hide");
                 $('#exisitingAddressBox').collapse("show");
             });
 
-
             $('input#newShippingAddress').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#newShippingAddressBox').collapse("show");
 
             });
 
             $('input#existingShippingAddress').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#newShippingAddressBox').collapse("hide");
-
             });
-
 
             $('input#creditCard').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#creditCardCollapse').collapse("toggle");
-
             });
-
 
             $('input#CashOnDelivery').on('ifChanged', function (event) {
-                //alert(event.type + ' callback');
                 $('#CashOnDeliveryCollapse').collapse("toggle");
-
             });
-
-
         });
+    </script>
 @stop

@@ -1,57 +1,65 @@
 @extends('template')
 
+@section('stylesheet')
+    <link href="{{ URL::asset('css/footable-0.1.css') }}" rel="stylesheet">
+@stop
+
 @section('content')
-    <div class="container main-container headerOffset">
-        <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-7">
-                <h1 class="section-title-inner"><span><i class="fa fa-list-alt"></i> Užsakymų sąrašas</span></h1>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="block-title-2"> Jūsų užsakymų sąrašas</h2>
-                    </div>
-                    <div style="clear:both"></div>
-                    <div class="col-xs-12 col-sm-12">
-                        @if(count($orders))
-                            <table class="footable">
-                                <thead>
-                                <tr>
-                                    <th data-class="expand" data-sort-initial="true"><span title="table sorted by this column on load">Užsakymo ID</span></th>
-                                    <th data-hide="default"> Kaina</th>
-                                    <th data-hide="default" data-type="numeric"> Užsakymo data</th>
-                                    <th data-hide="phone" data-type="numeric"> Statusas</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($orders as $order)
+    <section>
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-7">
+                    <header>
+                        <h1 class="section-title-inner"><span><i class="fa fa-list-alt"></i> Užsakymų sąrašas</span></h1>
+                    </header>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="block-title-2"> Jūsų užsakymų sąrašas</h2>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-xs-12 col-sm-12">
+                            @if(count($orders))
+                                <table class="footable">
+                                    <thead>
                                     <tr>
-                                        <td width="15%">#{{ $order->id }}</td>
-                                        <td>{{ $order->total }} €</td>
-                                        <td>{{ $order->created_at }}</td>
-                                        <td width="5%"><span class="label label-warning">Vykdoma</span>
-                                        </td>
+                                        <th><span title="table sorted by this column on load">Užsakymo ID</span></th>
+                                        <th>Kaina</th>
+                                        <th>Užsakymo data</th>
+                                        <th>Statusas</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            Užsakymų sąrašas yra tuščias
-                        @endif
-                    </div>
-                    <div style="clear:both"></div>
-                    <div class="col-lg-12 clearfix">
-                        <ul class="pager">
-                            <li class="previous pull-right"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Grįžti į parduotuvę</a>
-                            </li>
-                            <li class="next pull-left"><a href="{{ route('profile.home') }}"> &larr; Grįžti į paskyrą</a></li>
-                        </ul>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($orders as $order)
+                                        <tr>
+                                            <td style="width: 15%;">#{{ $order->id }}</td>
+                                            <td>{{ $order->total }} €</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td style="width: 5%;"><span class="label label-warning">Vykdoma</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                Užsakymų sąrašas yra tuščias
+                            @endif
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-12 clearfix">
+                            <ul class="pager">
+                                <li class="previous pull-right"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Grįžti į parduotuvę</a>
+                                </li>
+                                <li class="next pull-left"><a href="{{ route('profile.home') }}"> &larr; Grįžti į paskyrą</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-5"></div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-5"></div>
+            <div style="clear:both"></div>
         </div>
-        <div style="clear:both"></div>
-    </div>
-    <div class="gap"></div>
+        <div class="gap"></div>
+    </section>
 @stop
 
 @section('scripts')

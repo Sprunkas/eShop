@@ -37,16 +37,16 @@
                 </div>
                     <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                         <h3>Paskyra</h3>
-                        <ul>
-                            @if(Auth::check())
+                        @if(Auth::check())
+                            <ul>
                                 <li><a href="{{ route('profile.home') }}">Mano profilis</a></li>
                                 <li><a href="{{ route('profile.orders') }}">Užsakymų sąrašas</a></li>
                                 <li><a href="{{ route('profile.addresses') }}">Mano adresai</a></li>
                                 <li><a href="{{ route('profile.settings') }}">Nustatymai</a></li>
-                            @else
-                                <p>Norint naudotis paskyra turit prisijungti</p>
-                            @endif
-                        </ul>
+                            </ul>
+                        @else
+                            <p>Norint naudotis paskyra turit prisijungti</p>
+                        @endif
                     </div>
 
                 <div style="clear:both" class="hide visible-xs"></div>
